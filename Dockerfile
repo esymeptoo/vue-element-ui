@@ -6,7 +6,7 @@ WORKDIR /home/Service
  
 # Bundle app source
 COPY . /home/Service
-RUN npm install
+RUN cnpm install
  
 EXPOSE 5000
 CMD [ "npm", "run", "development" ]
