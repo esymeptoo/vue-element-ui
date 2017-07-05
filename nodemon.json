@@ -1,0 +1,13 @@
+{
+  "env": {
+    "PORT": "443"
+  },
+  "execMap": {
+    "": "node",
+    "js": "node"
+  },
+  "watch": [
+    "routes"
+  ],
+  "ext": "js json"
+}
