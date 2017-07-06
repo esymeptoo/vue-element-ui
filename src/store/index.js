@@ -6,6 +6,7 @@ import Vuex from 'vuex'
  */
 import VueEditorStore from './VueEditorStore'
 import NavBarStore from './NavBarStore'
+import TableStore from './TableStore'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -28,6 +29,6 @@ export default new Vuex.Store({
     }
   },
   modules: {
-    VueEditorStore, NavBarStore
+    VueEditorStore, NavBarStore, TableStore
   }
 })

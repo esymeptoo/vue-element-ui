@@ -9,7 +9,7 @@ exports.getProvince = function (url) {
             if (err) {
                 reject(err);
             }
-            console.log(body);
+            // console.log(body);
             resolve(body);
         })
     })

@@ -9,4 +9,4 @@ COPY . /home/Service
 RUN cnpm install
  
 EXPOSE 5000
-CMD [ "npm", "run", "development" ]
+CMD [ "npm" , "build"]
