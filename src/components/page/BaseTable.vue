@@ -69,7 +69,7 @@
         </el-dialog>
         <div style="position: relative;">
             <!--<my-loading :isShow="loadingShow"></my-loading>-->
-            <el-table :data="currentProvince" :slot="empty" v-loading="loadingShow">
+            <el-table :data="currentProvince" :slot="empty" v-loading="loadingShow" v-model="testGetters1">
                 <el-table-column
                     prop = "id"
                     label = "id"
@@ -97,6 +97,10 @@
                 >
             </el-pagination>
         </div>
+        <div>
+            <li v-for="val in testGetter3">{{val.name}}</li>
+        </div>
+        <el-button @click="addTestData">测试getters新增记录</el-button>
     </div>
 </template>
 
@@ -126,6 +130,13 @@
                 }
             }
             return {
+                testData: [{
+                    flag: true,
+                    id: 1
+                },{
+                    flag: false,
+                    id: 2
+                }],
                 search: '',
                 dialogVisible: false,
                 empty: '正在加载',
@@ -142,7 +153,9 @@
         },
         created(){
             //获取省列表
+            console.log('获取省列表')
             this.getData();
+            console.log('>>>>');
         },
         computed: {
             ...mapState({
@@ -152,6 +165,9 @@
                 ruleForm: state => state.TableStore.ruleForm,
                 loadingShow: state => state.TableStore.loadingShow,
             }),
+            ...mapGetters([
+                "testGetter", "testGetters1", "testGetter3"
+            ])
         },
         methods: {
             ...mapActions([
@@ -205,6 +221,12 @@
             },
             searchProvince: function () {
                 this.searchData(this.search)
+            },
+            addTestData () {
+                this.$store.dispatch('addTestData', {
+                    type: 2,
+                    name: 'zc4'
+                })
             }
         },
         watch: {

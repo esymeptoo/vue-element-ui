@@ -1,6 +1,9 @@
 export default {
     state: {
-        province: [],      //省列表
+        province: [{
+            id: 1,
+            name: 'sss'
+        }],      //省列表
         currentProvince: [],    //当前页面展示的省列表
         originProvince: [],     //拷贝省列表
         currentPage: 1,    //当期页码
@@ -9,27 +12,41 @@ export default {
             id: '',
             name: ''
         },
-        loadingShow: true           //loading状态
+        loadingShow: true,           //loading状态
+        test: [{
+            type: 1,
+            name: 'zc1'
+        }, {
+            type: 2,
+            name: 'zc2'
+        }, {
+            type: 1,
+            name: 'zc3'
+        }]
     },
     getters: {
         //计算场景 
-        //计算分页每页的数据
-        // getCurrentPageData(state) {
-        //     // const list = state.province.filter((item, index) => {
-        //     //     // return (index >= (state.pageSize * (state.currentPage -1)) && index <= (state.pageSize * state.currentPage) - 1) 
-        //     //     return item.id !== '110000'
-        //     // })
-        //     // console.log(list)
-        //     console.log(`当前是${state.currentPage}页`)
-        //     let list = [];
-        //     state.province.forEach((item, index) => {
-        //         if (index >= ((state.currentPage -1) * (state.pageSize)) && index < (state.currentPage) * (state.pageSize)) {
-        //             list.push(item)
-        //         }
-        //     })
-        //     console.log(list)
-        //     return list;
-        // }
+        //computed计算组件state ------ getteres计算store的state
+        //组件绑定了store的数据，可适当给store添加过滤规则或者其他计算规则 再将计算之后的数据传给组件
+        testGetter(state) {
+            console.log('>>>')
+            state.currentProvince = [{
+                id: 1,
+                name: '周驰'
+            }];
+            return state;
+        },
+        testGetters1: function (state) {
+            console.log('>>>>>.')
+            state.province = [];
+            console.log(state.province)
+        },
+        testGetter3: function (state) {
+            console.log('getters测试')
+            return state.test.filter((item) => {
+                return item.type == 1
+            })
+        }
     },
     //类似redux中的reducer
     mutations: {
@@ -126,7 +143,6 @@ export default {
             Object.assign(state, {
                 loadingShow: false,
                 currentProvince: payload,
-                province: payload,
             })
         }, 
         //搜索值为空时 回复全部记录
@@ -141,6 +157,9 @@ export default {
                 currentProvince: list,
                 loadingShow: false
             })
+        },
+        addTestData: function (state, payload) {
+            state.test.push(payload);
         }
     },
     //类似effects异步
@@ -168,6 +187,9 @@ export default {
                     commit('loadingHide', list)
                 }, 1000)
             }
+        },
+        addTestData({ commit, state }, payload) {
+            commit('addTestData', payload)
         }
     }
 }
